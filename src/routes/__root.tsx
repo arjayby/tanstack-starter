@@ -1,6 +1,7 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { DirectionProvider } from "@/components/ui/direction";
 
 import appCss from "../styles.css?url";
 
@@ -31,12 +32,14 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="en" dir="ltr">
 			<head>
 				<HeadContent />
 			</head>
 			<body>
-				{children}
+				<DirectionProvider direction="ltr" dir="ltr">
+					{children}
+				</DirectionProvider>
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",
