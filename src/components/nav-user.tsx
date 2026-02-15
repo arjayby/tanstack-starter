@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import {
 	BadgeCheckIcon,
 	BellIcon,
@@ -6,6 +7,7 @@ import {
 	LogOutIcon,
 	SparklesIcon,
 } from "lucide-react";
+import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -22,6 +24,8 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from "@/components/ui/sidebar";
+import { authClient } from "@/lib/auth-client";
+import { getAuthToastMessage } from "@/lib/utils";
 
 export function NavUser({
 	user,
@@ -33,6 +37,16 @@ export function NavUser({
 	};
 }) {
 	const { isMobile } = useSidebar();
+	const navigate = useNavigate();
+
+	async function handleSignOut() {
+		const { data } = await authClient.signOut();
+
+		if (data?.success) {
+			toast.success(getAuthToastMessage("signOut").title);
+			navigate({ to: "/sign-in" });
+		}
+	}
 
 	return (
 		<SidebarMenu>
@@ -95,7 +109,7 @@ export function NavUser({
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={handleSignOut}>
 							<LogOutIcon />
 							Log out
 						</DropdownMenuItem>
