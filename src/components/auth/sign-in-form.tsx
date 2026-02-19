@@ -13,7 +13,7 @@ import {
 	FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth.client";
 import { DEFAULT_AUTH_REDIRECT } from "@/lib/const";
 import { cn, getAuthToastMessage } from "@/lib/utils";
 
@@ -27,7 +27,7 @@ export function SignInForm({
 	...props
 }: React.ComponentProps<"form">) {
 	const navigate = useNavigate();
-	const search = useSearch({ from: "/(auth)/sign-in" });
+	const search = useSearch({ from: "/_auth/sign-in" });
 	const [isSigningInToGoogle, setIsSigningInToGoogle] = useState(false);
 
 	const form = useForm({

@@ -24,7 +24,7 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from "@/components/ui/sidebar";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth.client";
 import { getAuthToastMessage } from "@/lib/utils";
 
 export function NavUser({

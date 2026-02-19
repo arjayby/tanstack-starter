@@ -1,15 +1,30 @@
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+	createFileRoute,
+	Link,
+	Outlet,
+	redirect,
+} from "@tanstack/react-router";
 import z from "zod";
 import { ColorBends } from "@/components/color-bends";
-import { authedMiddleware } from "@/middlewares/authed";
+import { getSession } from "@/lib/auth.server";
+import { DEFAULT_AUTH_REDIRECT } from "@/lib/const";
 
-export const Route = createFileRoute("/(auth)")({
+export const Route = createFileRoute("/_auth")({
 	component: RouteComponent,
 	validateSearch: z.object({
 		redirect: z.string().optional(),
 	}),
-	server: {
-		middleware: [authedMiddleware],
+	beforeLoad: async ({ search }) => {
+		const session = await getSession();
+
+		if (session) {
+			throw redirect({
+				to: search.redirect || DEFAULT_AUTH_REDIRECT,
+			});
+		}
+		``;
+
+		return { user: null };
 	},
 });
 

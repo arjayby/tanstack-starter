@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
 	Breadcrumb,
@@ -14,12 +14,21 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { authMiddleware } from "@/middlewares/auth";
+import { getSession } from "@/lib/auth.server";
 
-export const Route = createFileRoute("/(protected)")({
+export const Route = createFileRoute("/_protected")({
 	component: RouteComponent,
-	server: {
-		middleware: [authMiddleware],
+	beforeLoad: async ({ location }) => {
+		const session = await getSession();
+
+		if (!session) {
+			throw redirect({
+				to: "/sign-in",
+				search: { redirect: location.href },
+			});
+		}
+
+		return { user: session.user };
 	},
 });
 
