@@ -1,3 +1,4 @@
+import { createLink } from "@tanstack/react-router";
 import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
 import { Slot } from "radix-ui";
 import type * as React from "react";
@@ -54,6 +55,8 @@ function BreadcrumbLink({
 		/>
 	);
 }
+
+const TanstackBreadcrumbLink = createLink(BreadcrumbLink);
 
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
 	return (
@@ -114,6 +117,7 @@ export {
 	BreadcrumbList,
 	BreadcrumbItem,
 	BreadcrumbLink,
+	TanstackBreadcrumbLink,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
 	BreadcrumbEllipsis,
