@@ -22,7 +22,6 @@ export const Route = createFileRoute("/_auth")({
 				to: search.redirect || DEFAULT_AUTH_REDIRECT,
 			});
 		}
-		``;
 
 		return { user: null };
 	},
