@@ -30,7 +30,7 @@ const data = {
 	user: {
 		name: "shadcn",
 		email: "m@example.com",
-		avatar: "/avatars/shadcn.jpg",
+		avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Ryan",
 	},
 	navMain: [
 		{

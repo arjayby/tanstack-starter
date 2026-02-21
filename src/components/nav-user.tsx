@@ -1,7 +1,6 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import {
 	BadgeCheckIcon,
-	BellIcon,
 	ChevronsUpDownIcon,
 	CreditCardIcon,
 	LogOutIcon,
@@ -95,17 +94,15 @@ export function NavUser({
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<BadgeCheckIcon />
-								Account
-							</DropdownMenuItem>
+							<Link to="/account">
+								<DropdownMenuItem>
+									<BadgeCheckIcon />
+									Account
+								</DropdownMenuItem>
+							</Link>
 							<DropdownMenuItem>
 								<CreditCardIcon />
 								Billing
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<BellIcon />
-								Notifications
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />

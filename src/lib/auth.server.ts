@@ -23,3 +23,13 @@ export const ensureSession = createServerFn({ method: "GET" }).handler(
 		return session;
 	},
 );
+
+export const listUserAccountsAndSessions = createServerFn({
+	method: "GET",
+}).handler(async () => {
+	const headers = getRequestHeaders();
+	const accounts = await auth.api.listUserAccounts({ headers });
+	const sessions = await auth.api.listSessions({ headers });
+
+	return { accounts, sessions };
+});
