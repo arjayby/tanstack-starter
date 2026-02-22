@@ -32,7 +32,7 @@ export function SignInForm({
 
 	const form = useForm({
 		defaultValues: {
-			email: "",
+			email: search.email || "",
 			password: "",
 		},
 		validators: {
@@ -68,7 +68,7 @@ export function SignInForm({
 	}
 
 	return (
-		// biome-ignore lint/correctness/useUniqueElementIds: <explanation>
+		// biome-ignore lint/correctness/useUniqueElementIds: <>
 		<form
 			id="sign-in-form"
 			className={cn("flex flex-col gap-6", className)}
@@ -145,7 +145,7 @@ export function SignInForm({
 						onClick={handleGoogleSignIn}
 						loading={isSigningInToGoogle}
 					>
-						{/** biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+						{/** biome-ignore lint/a11y/noSvgWithoutTitle: <> */}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"

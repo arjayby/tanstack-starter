@@ -13,6 +13,7 @@ export const Route = createFileRoute("/_auth")({
 	component: RouteComponent,
 	validateSearch: z.object({
 		redirect: z.string().optional(),
+		email: z.email().optional().catch(undefined),
 	}),
 	beforeLoad: async ({ search }) => {
 		const session = await getSession();

@@ -15,7 +15,7 @@ interface ToastMessage {
 
 const TOAST_MESSAGES: Record<ToastType, ToastMessage> = {
 	signIn: { title: "You are now signed in." },
-	signUp: { title: "Your account has been created." },
+	signUp: { title: "Account created. Verify your email to sign in." },
 	signOut: { title: "You have been signed out." },
 };
 

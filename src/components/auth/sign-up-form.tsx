@@ -49,7 +49,10 @@ export function SignUpForm({
 					onSuccess: () => {
 						const { title } = getAuthToastMessage("signUp");
 						toast.success(title);
-						navigate({ to: search.redirect || DEFAULT_AUTH_REDIRECT });
+						navigate({
+							to: "/sign-in",
+							search: { email: value.email, redirect: search.redirect },
+						});
 					},
 					onError: ({ error }) => {
 						toast.error(`${error.message}.`);
@@ -69,7 +72,7 @@ export function SignUpForm({
 	}
 
 	return (
-		// biome-ignore lint/correctness/useUniqueElementIds: <explanation>
+		// biome-ignore lint/correctness/useUniqueElementIds: <>
 		<form
 			id="sign-up-form"
 			className={cn("flex flex-col gap-6", className)}
@@ -146,7 +149,7 @@ export function SignUpForm({
 						onClick={handleGoogleSignUp}
 						loading={isSigningUpToGoogle}
 					>
-						{/** biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+						{/** biome-ignore lint/a11y/noSvgWithoutTitle: <> */}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
