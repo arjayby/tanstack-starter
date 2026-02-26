@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import EmailVerification from "emails/email-verification";
+import ResetPassword from "emails/reset-password";
 import { Resend } from "resend";
 import { db } from "@/db";
 
@@ -14,6 +15,14 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,
+		sendResetPassword: async ({ user, url }) => {
+			await resend.emails.send({
+				from: "onboarding@resend.dev",
+				to: user.email,
+				subject: "Reset Password",
+				react: ResetPassword({ url }),
+			});
+		},
 	},
 	socialProviders: {
 		google: {

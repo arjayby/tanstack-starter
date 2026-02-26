@@ -7,7 +7,12 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-type ToastType = "signIn" | "signUp" | "signOut";
+type ToastType =
+	| "signIn"
+	| "signUp"
+	| "signOut"
+	| "resetPassword"
+	| "changePassword";
 
 interface ToastMessage {
 	title: string;
@@ -21,6 +26,14 @@ const TOAST_MESSAGES: Record<ToastType, ToastMessage> = {
 		description: "Verify your email to sign in.",
 	},
 	signOut: { title: "You have been signed out." },
+	resetPassword: {
+		title: "Password reset email sent.",
+		description: "Check your email to reset your password.",
+	},
+	changePassword: {
+		title: "Password changed.",
+		description: "You can now sign in with your new password.",
+	},
 };
 
 export function getAuthToastMessage(type: ToastType): ToastMessage {

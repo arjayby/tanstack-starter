@@ -112,7 +112,16 @@ export function SignInForm({
 							field.state.meta.isTouched && !field.state.meta.isValid;
 						return (
 							<Field data-invalid={isInvalid}>
-								<FieldLabel htmlFor={field.name}>Password</FieldLabel>
+								<div className="flex items-center justify-between">
+									<FieldLabel htmlFor={field.name}>Password</FieldLabel>
+									<Link
+										to="/reset-password"
+										search={(prev) => prev}
+										className="text-sm underline-offset-4 hover:underline"
+									>
+										Forgot your password?
+									</Link>
+								</div>
 								<Input
 									id={field.name}
 									name={field.name}
