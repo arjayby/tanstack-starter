@@ -41,6 +41,7 @@ export const auth = betterAuth({
 			});
 		},
 		sendOnSignUp: true,
+		autoSignInAfterVerification: true,
 	},
 	plugins: [tanstackStartCookies()], // make sure tanstackStartCookies is the last plugin in the array
 });
