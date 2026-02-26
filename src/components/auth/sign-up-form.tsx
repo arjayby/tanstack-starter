@@ -47,8 +47,8 @@ export function SignUpForm({
 				},
 				{
 					onSuccess: () => {
-						const { title } = getAuthToastMessage("signUp");
-						toast.success(title);
+						const { title, description } = getAuthToastMessage("signUp");
+						toast.success(title, { description });
 						navigate({
 							to: "/sign-in",
 							search: { email: value.email, redirect: search.redirect },

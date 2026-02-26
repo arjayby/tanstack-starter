@@ -11,11 +11,15 @@ type ToastType = "signIn" | "signUp" | "signOut";
 
 interface ToastMessage {
 	title: string;
+	description?: string;
 }
 
 const TOAST_MESSAGES: Record<ToastType, ToastMessage> = {
 	signIn: { title: "You are now signed in." },
-	signUp: { title: "Account created. Verify your email to sign in." },
+	signUp: {
+		title: "Account created.",
+		description: "Verify your email to sign in.",
+	},
 	signOut: { title: "You have been signed out." },
 };
 
