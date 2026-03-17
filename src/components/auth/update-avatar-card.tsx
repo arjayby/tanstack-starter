@@ -1,4 +1,4 @@
-import { useRouteContext } from "@tanstack/react-router";
+import { useRouteContext, useRouter } from "@tanstack/react-router";
 import { createServerFn, useServerFn } from "@tanstack/react-start";
 import { AwsClient } from "aws4fetch";
 import { useRef } from "react";
@@ -36,11 +36,12 @@ const getPreSignedUrl = createServerFn()
 	.middleware([requireAuth])
 	.inputValidator(uploadRequestSchema)
 	.handler(async ({ context: { user }, data: { fileType } }) => {
+		const avatarId = crypto.randomUUID();
 		const bucket = process.env.R2_BUCKET_NAME as string;
 		const endpoint = process.env.R2_ENDPOINT as string;
 		const publicUrl = process.env.R2_PUBLIC_URL as string;
 
-		const key = `avatars/${user.id}/avatar`;
+		const key = `avatars/${user.id}/${avatarId}`;
 
 		const r2 = new AwsClient({
 			region: "auto",
@@ -65,6 +66,8 @@ const getPreSignedUrl = createServerFn()
 
 export function UpdateAvatarCard() {
 	const { user } = useRouteContext({ from: "/_protected/account" });
+	const router = useRouter();
+
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const getPreSignedUrlFn = useServerFn(getPreSignedUrl);
 
@@ -96,6 +99,7 @@ export function UpdateAvatarCard() {
 			}
 
 			await authClient.updateUser({ image: publicUrl });
+			await router.invalidate();
 		} catch (err) {
 			console.error("Upload error:", err);
 		}
